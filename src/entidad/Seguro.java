@@ -2,20 +2,16 @@ package entidad;
 
 public class Seguro implements Comparable <Seguro>
 {
-	   
-	private static int idCounter = 0;
-	private final int id;
+	private int id;
 	private String descripcion;
 	private int idTipo;
 	private float costoContratacion;
 	private float costoAsegurado; 
 	     
 	
-	public Seguro( String descripcion, int idTipo, float costoContratacion, float costoAsegurado) 
+	public Seguro(int id, String descripcion, int idTipo, float costoContratacion, float costoAsegurado) 
 	{
-		
-		idCounter++;
-		this.id = idCounter;
+		this.id = id;
 		this.descripcion = descripcion;
 		this.idTipo = idTipo;
 		this.costoContratacion = costoContratacion;
@@ -24,48 +20,52 @@ public class Seguro implements Comparable <Seguro>
 
 	public int getId()
 	{
-			return id;
+		return id;
 	}
 
+	public void setId(int id)
+	{
+		this.id = id;
+	}
 	
 	public String getDescripcion()
 	{
-			return descripcion;
+		return descripcion;
 	}
 
 	public void setDescripcion(String descripcion)
 	{
-			this.descripcion = descripcion;
+		this.descripcion = descripcion;
 	}
 
 	public int getIdTipo()
 	{
-			return idTipo;
+		return idTipo;
 	}
 
 	public void setIdTipo(int idTipo) 
 	{
-			this.idTipo = idTipo;
+		this.idTipo = idTipo;
 	}
 
 	public float getCostoContratacion() 
 	{
-			return costoContratacion;
+		return costoContratacion;
 	}
 
 	public void setCostoContratacion(float costoContratacion)
 	{
-			this.costoContratacion = costoContratacion;
+		this.costoContratacion = costoContratacion;
 	}
 
 	public float getCostoAsegurado()
 	{
-			return costoAsegurado;
+		return costoAsegurado;
 	}
 
 	public void setCostoAsegurado(float costoAsegurado) 
 	{
-			this.costoAsegurado = costoAsegurado;
+		this.costoAsegurado = costoAsegurado;
 	}
 
 	@Override
@@ -117,13 +117,9 @@ public class Seguro implements Comparable <Seguro>
 	}
 
 	@Override
-	public int compareTo(Seguro seguro) {
-		if(seguro.getDescripcion().toLowerCase().compareTo(this.descripcion.toLowerCase()) == 0) return 0;
-		if(seguro.getDescripcion().toLowerCase().compareTo(this.descripcion.toLowerCase()) < 0) return 1;
-		return -1;
-		
+	public int compareTo(Seguro seguro)
+	{
+		return Integer.compare(this.getId(), seguro.getId());
 	}
-
-
 	
 }
