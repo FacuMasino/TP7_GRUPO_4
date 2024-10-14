@@ -1,0 +1,84 @@
+@charset "ISO-8859-1";
+
+/* --- CSS Reset --- */
+
+p { margin: 0; padding: 0; }
+*, *::before, *::after { box-sizing: border-box; }
+
+body { min-height: 100dvh; }
+input, button, textarea, select { font: inherit; }
+
+p { text-wrap: pretty; }
+h1, h2, h3, h4, h5, h6 { text-wrap: balance; }
+/* ------ */
+
+/* Clases del proyecto */
+.form-agregar-seguro {
+	width: 400px;
+}
+
+.form-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.form-agregar-seguro p{
+	flex: 1;
+	margin-right: 1rem;
+}
+
+.form-agregar-seguro input, select, span {
+	flex: 2; /* Ocupa el doble de espacio que la etiqueta <p> */
+}
+
+.form-agregar-seguro button{
+	align-self: flex-end;
+}
+
+/* ------ */
+
+/* Clases útiles */
+.menu {
+    display: flex;
+    flex-direction: row;
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+    margin-bottom: 1rem;
+}
+
+.menu-item {
+	padding-right: .5rem;
+	paddin-left: .5rem
+}
+
+.menu-link {
+	text-decoration: none;
+	color: blue;
+}
+
+.menu-link:visited {
+	color: blue;
+}
+
+.menu-link:hover {
+	text-decoration: underline;
+}
+
+.d-flex {
+	display: flex;
+}
+
+.flex-row {
+	flex-direction: row;
+}
+
+.flex-column {
+	flex-direction: column;
+}
+
+.justify-content-between {
+	justify-content: space-between;
+}
