@@ -1,7 +1,7 @@
 package daoImpl;
 
-import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -21,9 +21,9 @@ public class Conexion
 
 		try
 		{
-			FileInputStream in = new FileInputStream("config.properties");
-			props.load(in);
-			in.close();
+			InputStream is = Conexion.class.getClassLoader().getResourceAsStream("config.properties");
+			props.load(is);
+			is.close();
 			
 			host = props.getProperty("db.host");
 			user = props.getProperty("db.user");
