@@ -2,6 +2,7 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
 <%@page import="entidad.TipoSeguro"%>
+<%@page import="daoImpl.TipoSeguroDaoImpl"%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -12,6 +13,11 @@
 	<body>
 		<!-- menú -->
 		<%@include file="Header.jsp"%>
+		<%
+			TipoSeguroDaoImpl tipoDao = new TipoSeguroDaoImpl();
+			ArrayList<TipoSeguro> listaTipos = new ArrayList<TipoSeguro>();
+			listaTipos = tipoDao.readAll();
+		%>
 		<h1>Agregar Seguros</h1>
 		<form class="form-agregar-seguro d-flex flex-column" action="ServletSeguro" method="get">
 			<div class="form-group">
@@ -34,13 +40,6 @@
 				<p>Descripción</p>
 				<input type="text" name="txtDescripcion" required/>
 			</div>
-				<%
-					ArrayList<TipoSeguro> listaTipos = new ArrayList<TipoSeguro>();
-					if(request.getAttribute("listaTipos") != null)
-					{
-						listaTipos = (ArrayList<TipoSeguro>) request.getAttribute("listaTipos");
-					}
-				%>
 			<div class="form-group">
 				<p>Tipo de Seguro</p>
 				<select name="ddlTipoSeguro">

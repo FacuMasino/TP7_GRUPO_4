@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import daoImpl.SeguroDaoImpl;
 import daoImpl.TipoSeguroDaoImpl;
@@ -32,9 +33,7 @@ public class ServletSeguro extends HttpServlet
 		SeguroDaoImpl seguroDao = new SeguroDaoImpl();
 		TipoSeguroDaoImpl tipoDao = new TipoSeguroDaoImpl();
 		int nextId = seguroDao.obtenerUltimoId() + 1;
-		ArrayList<TipoSeguro> listaTipos = new ArrayList<TipoSeguro>();
-		listaTipos = tipoDao.readAll();
-		
+
 		request.setAttribute("nextId", nextId);
 		
 		if(request.getParameter("btnAceptar") != null) /*veo de preguntar por campos llenos...es necesario?*/
@@ -77,8 +76,7 @@ public class ServletSeguro extends HttpServlet
 		
 		
 		RequestDispatcher rd = request.getRequestDispatcher("AgregarSeguro.jsp");
-		rd.forward(request, response);
-		
+		rd.forward(request, response);		
 	}
 
 
