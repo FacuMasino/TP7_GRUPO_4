@@ -28,6 +28,12 @@ public class TipoSeguro implements Comparable <TipoSeguro>
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
+	
+	
+	@Override
+	public String toString() {
+		return "TipoSeguro [idTipo=" + id + "]";
+	}
 
 	@Override
 	public int hashCode() {

@@ -4,7 +4,8 @@ public class Seguro implements Comparable <Seguro>
 {
 	private int id;
 	private String descripcion;
-	private int idTipo;
+	//private int idTipo;
+	private TipoSeguro tipoSeguro; 
 	private float costoContratacion;
 	private float costoAsegurado; 
 	
@@ -13,11 +14,11 @@ public class Seguro implements Comparable <Seguro>
 		
 	}
 	
-	public Seguro(int id, String descripcion, int idTipo, float costoContratacion, float costoAsegurado) 
+	public Seguro(int id, String descripcion,TipoSeguro tipoSeguro, float costoContratacion, float costoAsegurado) 
 	{
 		this.id = id;
 		this.descripcion = descripcion;
-		this.idTipo = idTipo;
+		this.setTipoSeguro(tipoSeguro);
 		this.costoContratacion = costoContratacion;
 		this.costoAsegurado = costoAsegurado;
 	}
@@ -42,7 +43,7 @@ public class Seguro implements Comparable <Seguro>
 		this.descripcion = descripcion;
 	}
 
-	public int getIdTipo()
+	/*public int getIdTipo()
 	{
 		return idTipo;
 	}
@@ -50,7 +51,7 @@ public class Seguro implements Comparable <Seguro>
 	public void setIdTipo(int idTipo) 
 	{
 		this.idTipo = idTipo;
-	}
+	}*/
 
 	public float getCostoContratacion() 
 	{
@@ -71,11 +72,20 @@ public class Seguro implements Comparable <Seguro>
 	{
 		this.costoAsegurado = costoAsegurado;
 	}
+	
+	public TipoSeguro getTipoSeguro() {
+		return tipoSeguro;
+	}
+
+	public void setTipoSeguro(TipoSeguro tipoSeguro) {
+		this.tipoSeguro = tipoSeguro;
+	}
+
 
 	@Override
 	public String toString() 
 	{
-		return "Seguro [id=" + id + ", descripcion=" + descripcion + ", idTipo=" + idTipo + ", costoContratacion="
+		return "Seguro [id=" + id + ", descripcion=" + descripcion + ", idTipo=" + tipoSeguro.toString() + ", costoContratacion="
 				+ costoContratacion + ", costoAsegurado=" + costoAsegurado + "]";
 	}
 
@@ -88,7 +98,7 @@ public class Seguro implements Comparable <Seguro>
 		result = prime * result + Float.floatToIntBits(costoContratacion);
 		result = prime * result + ((descripcion == null) ? 0 : descripcion.hashCode());
 		result = prime * result + id;
-		result = prime * result + idTipo;
+		result = prime * result + getTipoSeguro().getId();
 		return result;
 	}
 
@@ -115,7 +125,7 @@ public class Seguro implements Comparable <Seguro>
 			return false;
 		if (id != other.id)
 			return false;
-		if (idTipo != other.idTipo)
+		if (getTipoSeguro().getId() != other.getTipoSeguro().getId())
 			return false;
 		return true;
 	}
@@ -125,5 +135,7 @@ public class Seguro implements Comparable <Seguro>
 	{
 		return Integer.compare(this.getId(), seguro.getId());
 	}
+
+	
 	
 }

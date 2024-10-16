@@ -17,12 +17,13 @@ public class Main {
 		SeguroDaoImpl seguroDao = new SeguroDaoImpl();
 		Seguro seguro1 = new Seguro();
 		
-		seguro1.setIdTipo(2);
-		seguro1.setDescripcion("Seguro de VIDA para mayores de 99 años");
+		
+		seguro1.getTipoSeguro().setId(2);
+		seguro1.setDescripcion("Seguro de VIDA para mayores de 99 aï¿½os");
 		seguro1.setCostoContratacion(989889);
 		seguro1.setCostoAsegurado(5);
 		
-		//seguroDao.agregar(seguro1);
+		///seguroDao.agregar(seguro1);
 		
 		
 		ArrayList<Seguro> listaSeguros = new ArrayList<Seguro>();
