@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import daoImpl.SeguroDaoImpl;
+import daoImpl.TipoSeguroDaoImpl;
 import entidad.Seguro;
 import entidad.TipoSeguro;
 
@@ -28,7 +30,10 @@ public class ServletSeguro extends HttpServlet
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		SeguroDaoImpl seguroDao = new SeguroDaoImpl();
+		TipoSeguroDaoImpl tipoDao = new TipoSeguroDaoImpl();
 		int nextId = seguroDao.obtenerUltimoId() + 1;
+		ArrayList<TipoSeguro> listaTipos = new ArrayList<TipoSeguro>();
+		listaTipos = tipoDao.readAll();
 		
 		request.setAttribute("nextId", nextId);
 		
