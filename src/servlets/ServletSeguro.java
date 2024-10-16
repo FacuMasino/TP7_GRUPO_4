@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import daoImpl.SeguroDaoImpl;
 import entidad.Seguro;
+import entidad.TipoSeguro;
 
 
 @WebServlet("/ServletSeguro")
@@ -33,21 +34,40 @@ public class ServletSeguro extends HttpServlet
 		
 		if(request.getParameter("btnAceptar") != null) /*veo de preguntar por campos llenos...es necesario?*/
 		{
-			/*
+			
 			String descripcion = request.getParameter("txtDescripcion");
 			int idTipo = Integer.parseInt(request.getParameter("ddlTipoSeguro").toString());
 			float costoContratacion = Float.parseFloat(request.getParameter("txtCosto").toString());
 			float costoAsegurado = Float.parseFloat(request.getParameter("txtMaximo").toString());
 			
 			Seguro seg = new Seguro();
+			TipoSeguro tipoSeg = new TipoSeguro();
+			tipoSeg.setId(idTipo);
+			//tipoSeg.setDescripcion("Prueba web");
+			
 			
 			seg.setDescripcion(descripcion);
-			seg.setIdTipo(idTipo);
+			seg.setTipoSeguro(tipoSeg);
 			seg.setCostoContratacion(costoContratacion);
 			seg.setCostoAsegurado(costoAsegurado);
 			
-			seguroDao.agregar(seg);
-			*/
+			Boolean flag;
+			String message;
+			flag = seguroDao.agregar(seg);
+			
+			if(flag)
+			{
+				message = "Seguro Agregado OK";
+				nextId = seguroDao.obtenerUltimoId() + 1;
+				request.setAttribute("nextId", nextId);
+			}
+			else
+			{
+				message = "Error al guardar seguro...";
+			}
+			
+			request.setAttribute("message", message);
+			
 		}
 		
 		
