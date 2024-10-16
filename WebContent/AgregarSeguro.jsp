@@ -23,8 +23,9 @@
 					%>
 						<%=nextId %>
 					<%
-						}		
+						}					
 					%>
+					
 				</span>
 			</div>
 			<div class="form-group">
@@ -48,6 +49,17 @@
 				<input type="text" name="txtMaximo" required/>
 			</div>
 			<button type="submit" name="btnAceptar" >Aceptar</button>
+			
+			<%
+			if(request.getAttribute("message") != null)
+			{
+				String message = request.getAttribute("message").toString();
+			%>
+				<%=message %>
+			<%	
+			}
+			%>
+			
 		</form>
 	</body>
 </html>
