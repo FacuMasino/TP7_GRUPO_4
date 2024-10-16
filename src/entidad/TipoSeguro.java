@@ -7,6 +7,12 @@ public class TipoSeguro implements Comparable <TipoSeguro>
 	
 	public TipoSeguro() {}
 	
+	public TipoSeguro(int id)
+	{
+		this.id = id;
+		this.descripcion = "";
+	}
+	
 	public TipoSeguro(int id, String descripcion)
 	{
 		this.id = id;

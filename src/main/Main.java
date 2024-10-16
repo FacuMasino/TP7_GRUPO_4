@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import daoImpl.SeguroDaoImpl;
 import entidad.Seguro;
+import entidad.TipoSeguro;
 
 /////////////
 /////////////
@@ -18,12 +19,13 @@ public class Main {
 		Seguro seguro1 = new Seguro();
 		
 		
-		seguro1.getTipoSeguro().setId(2);
+		
 		seguro1.setDescripcion("Seguro de VIDA para mayores de 99 a�os");
+		seguro1.setTipoSeguro(new TipoSeguro(1));
 		seguro1.setCostoContratacion(989889);
 		seguro1.setCostoAsegurado(5);
 		
-		///seguroDao.agregar(seguro1);
+		seguroDao.agregar(seguro1);
 		
 		
 		ArrayList<Seguro> listaSeguros = new ArrayList<Seguro>();

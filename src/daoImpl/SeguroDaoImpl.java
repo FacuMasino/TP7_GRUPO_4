@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import dao.ISeguroDao;
 import entidad.Seguro;
+import entidad.TipoSeguro;
 
 public class SeguroDaoImpl implements ISeguroDao
 {
@@ -52,7 +53,7 @@ public class SeguroDaoImpl implements ISeguroDao
 			pstmt = conn.prepareStatement(insertQry);
 			
 			pstmt.setString(1, seguro.getDescripcion());
-			pstmt.setInt(2, seguro.getIdTipo());
+			pstmt.setInt(2, seguro.getTipoSeguro().getId());
 			pstmt.setFloat(3, seguro.getCostoContratacion());
 			pstmt.setFloat(4, seguro.getCostoAsegurado());
 			
@@ -127,14 +128,14 @@ public class SeguroDaoImpl implements ISeguroDao
 		return null;
 	}
 	
-	private Seguro getPersona(ResultSet resultSet) throws SQLException
+	private Seguro getSeguro(ResultSet resultSet) throws SQLException
 	{
 		int idSeguro = resultSet.getInt("idSeguro");
 		String descripcion = resultSet.getString("descripcion");
 		int idTipo = resultSet.getInt("idTipo");
 		float costoContratacion = resultSet.getFloat("costoContratacion");
 		float costoAsegurado = resultSet.getFloat("costoAsegurado");
-		return new Seguro(idSeguro,descripcion,idTipo,costoContratacion,costoAsegurado);
+		return new Seguro(idSeguro,descripcion,new TipoSeguro(idTipo),costoContratacion,costoAsegurado);
 	}
 	
 	@Override
@@ -161,7 +162,7 @@ public class SeguroDaoImpl implements ISeguroDao
 			resultSet = pstmt.executeQuery();
 			while(resultSet.next())
 			{
-				seguros.add(getPersona(resultSet));
+				seguros.add(getSeguro(resultSet));
 			}
 		} 
 		catch (SQLException e) 
