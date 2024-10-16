@@ -4,7 +4,6 @@ public class Seguro implements Comparable <Seguro>
 {
 	private int id;
 	private String descripcion;
-	//private int idTipo;
 	private TipoSeguro tipoSeguro; 
 	private float costoContratacion;
 	private float costoAsegurado; 
@@ -42,16 +41,6 @@ public class Seguro implements Comparable <Seguro>
 	{
 		this.descripcion = descripcion;
 	}
-
-	/*public int getIdTipo()
-	{
-		return idTipo;
-	}
-
-	public void setIdTipo(int idTipo) 
-	{
-		this.idTipo = idTipo;
-	}*/
 
 	public float getCostoContratacion() 
 	{

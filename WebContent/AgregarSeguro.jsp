@@ -1,5 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
+<%@page import="entidad.TipoSeguro"%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -11,7 +13,7 @@
 		<!-- menú -->
 		<%@include file="Header.jsp"%>
 		<h1>Agregar Seguros</h1>
-		<form class="form-agregar-seguro d-flex flex-column" action="ServletSeguro">
+		<form class="form-agregar-seguro d-flex flex-column" action="ServletSeguro" method="get">
 			<div class="form-group">
 				<p>Id Seguro</p>
 				<span>
@@ -31,12 +33,22 @@
 				<p>Descripción</p>
 				<input type="text" name="txtDescripcion" required/>
 			</div>
+				<%
+					ArrayList<TipoSeguro> listaTipos = new ArrayList<TipoSeguro>();
+					if(request.getAttribute("listaTipos") != null)
+					{
+						listaTipos = (ArrayList<TipoSeguro>) request.getAttribute("listaTipos");
+					}
+				%>
 			<div class="form-group">
 				<p>Tipo de Seguro</p>
 				<select name="ddlTipoSeguro">
-					<option value="1">usar for</option>
-					<option value="2">usar for</option>
-					<option value="3">usar for</option>
+					<option value="1">Seleccionar Tipo</option>
+				<%
+					for(TipoSeguro tipo : listaTipos){
+				%>
+					<option value=<%=tipo.getId() %>><%= tipo.getDescripcion() %></option>
+				<% } %>
 				</select>
 			</div>
 			<div class="form-group">
