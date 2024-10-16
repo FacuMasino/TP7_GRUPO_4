@@ -11,10 +11,21 @@
 		<!-- menú -->
 		<%@include file="Header.jsp"%>
 		<h1>Agregar Seguros</h1>
-		<form class="form-agregar-seguro d-flex flex-column">
+		<form class="form-agregar-seguro d-flex flex-column" action="ServletSeguro">
 			<div class="form-group">
 				<p>Id Seguro</p>
-				<span>[Id automático]</span>
+				<span>
+					<%
+						//int nextId=0;
+						if(request.getAttribute("nextId") != null)
+						{
+							int nextId=(int)request.getAttribute("nextId");
+					%>
+						<%=nextId %>
+					<%
+						}		
+					%>
+				</span>
 			</div>
 			<div class="form-group">
 				<p>Descripción</p>

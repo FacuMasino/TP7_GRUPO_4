@@ -14,6 +14,8 @@
 			</li>
 			<li class="menu-item">
 				<a class="menu-link" href="AgregarSeguro.jsp">Agregar seguro</a>
+			<!--<a class="menu-link" href="ServletSeguro">Agregar seguro</a>-->
+				
 			</li>
 			<li class="menu-item">
 				<a class="menu-link" href="ListarSeguros.jsp">Listar seguros</a>

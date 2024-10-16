@@ -7,7 +7,11 @@ public class Seguro implements Comparable <Seguro>
 	private int idTipo;
 	private float costoContratacion;
 	private float costoAsegurado; 
-	     
+	
+	public Seguro()
+	{
+		
+	}
 	
 	public Seguro(int id, String descripcion, int idTipo, float costoContratacion, float costoAsegurado) 
 	{
