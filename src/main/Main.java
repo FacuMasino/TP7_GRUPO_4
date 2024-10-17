@@ -1,7 +1,6 @@
 package main;
 
 import java.util.ArrayList;
-
 import daoImpl.SeguroDaoImpl;
 import entidad.Seguro;
 import entidad.TipoSeguro;

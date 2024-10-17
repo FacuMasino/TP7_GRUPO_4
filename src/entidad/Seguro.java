@@ -13,7 +13,7 @@ public class Seguro implements Comparable <Seguro>
 		
 	}
 	
-	public Seguro(int id, String descripcion,TipoSeguro tipoSeguro, float costoContratacion, float costoAsegurado) 
+	public Seguro(int id, String descripcion, TipoSeguro tipoSeguro, float costoContratacion, float costoAsegurado) 
 	{
 		this.id = id;
 		this.descripcion = descripcion;
@@ -96,51 +96,51 @@ public class Seguro implements Comparable <Seguro>
 	public boolean equals(Object obj) 
 	{
 		if (this == obj)
-		{			
+		{
 			return true;
 		}
 		
 		if (obj == null)
-		{			
+		{
 			return false;
 		}
 		
 		if (getClass() != obj.getClass())
-		{			
+		{
 			return false;
 		}
 		
 		Seguro other = (Seguro) obj;
 		
 		if (Float.floatToIntBits(costoAsegurado) != Float.floatToIntBits(other.costoAsegurado))
-		{			
+		{
 			return false;
 		}
 		
 		if (Float.floatToIntBits(costoContratacion) != Float.floatToIntBits(other.costoContratacion))
-		{			
+		{
 			return false;
 		}
 		
 		if (descripcion == null)
 		{
 			if (other.descripcion != null)
-			{				
+			{	
 				return false;
 			}
 		}
 		else if (!descripcion.equals(other.descripcion))
-		{			
+		{
 			return false;
 		}
 		
 		if (id != other.id)
-		{			
+		{
 			return false;
 		}
 		
 		if (getTipoSeguro().getId() != other.getTipoSeguro().getId())
-		{			
+		{
 			return false;
 		}
 		

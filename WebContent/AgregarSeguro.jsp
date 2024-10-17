@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="java.util.List"%>
-<%@page import="entidad.TipoSeguro"%>
-<%@page import="daoImpl.TipoSeguroDaoImpl"%>
-<%@page import="daoImpl.SeguroDaoImpl"%>
+<%@ page import="java.util.ArrayList"%>
+<%@ page import="java.util.List"%>
+<%@ page import="entidad.TipoSeguro"%>
+<%@ page import="daoImpl.TipoSeguroDaoImpl"%>
+<%@ page import="daoImpl.SeguroDaoImpl"%>
+
 <!DOCTYPE html>
+
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -28,7 +30,7 @@
 						SeguroDaoImpl seguroDao = new SeguroDaoImpl();
 						int nextId = seguroDao.obtenerUltimoId()+1;
 					%>
-					<%=nextId%>
+						<%=nextId%>
 				</span>
 			</div>
 			<div class="form-group">
@@ -39,11 +41,14 @@
 				<p>Tipo de Seguro</p>
 				<select name="ddlTipoSeguro">
 					<option value="1">Seleccionar Tipo</option>
-				<%
-					for(TipoSeguro tipo : listaTipos){
-				%>
-					<option value=<%=tipo.getId() %>><%= tipo.getDescripcion() %></option>
-				<% } %>
+					<%
+						for(TipoSeguro tipo : listaTipos)
+						{
+					%>
+							<option value=<%=tipo.getId() %>><%= tipo.getDescripcion() %></option>
+					<%
+						}
+					%>
 				</select>
 			</div>
 			<div class="form-group">
@@ -57,13 +62,13 @@
 			<button type="submit" name="btnAceptar" >Aceptar</button>
 			
 			<%
-			if(request.getAttribute("message") != null)
-			{
-				String message = request.getAttribute("message").toString();
+				if(request.getAttribute("message") != null)
+				{
+					String message = request.getAttribute("message").toString();
 			%>
-				<%=message %>
+					<%=message %>
 			<%	
-			}
+				}
 			%>
 			
 		</form>
