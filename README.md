@@ -21,7 +21,7 @@ Versiones más recientes pueden tener problemas de compatibilidad con versiones 
 ### MySQL Connector
 
 &nbsp;
-Es necesario descargar MySQL Connector desde el [sitio oficial de MySQL](https://dev.mysql.com/downloads/).
+Es necesario descargar MySQL Connector (JDBC) desde el [sitio oficial de MySQL](https://dev.mysql.com/downloads/).
 
 &nbsp;
 El archivo que indica la ruta de MySQL Connector no está siendo versionado para que no haya que configurar la ubicación del mismo cada vez que otro contribuidor la cambia.
@@ -62,7 +62,7 @@ Podés dejar tu ruta acá abajo anotada para futura referencia:
 
 &nbsp;
 Se deben configurar las credenciales de acceso a la base de datos.
-Para ello, hay que crear un archivo llamado `config.properties` en el directorio raíz del proyecto con el siguiente código, reemplazando `tupassword` por la contraseña de la base de datos.
+Para ello, hay que crear un archivo llamado `config.properties` en el directorio src con el siguiente código, reemplazando `tupassword` por la contraseña de la base de datos.
 
 ```properties
 # Dirección del host de la base de datos
@@ -75,5 +75,5 @@ db.user=root
 db.pass=tupassword
 
 # Nombre de la base de datos
-db.name=bdPersonas
+db.name=SegurosGroup
 ```

@@ -1,5 +1,6 @@
 package daoImpl;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
@@ -22,6 +23,16 @@ public class Conexion
 		try
 		{
 			InputStream is = Conexion.class.getClassLoader().getResourceAsStream("config.properties");
+			
+			if (is == null)
+			{
+		        throw new FileNotFoundException("El archivo 'config.properties' no se encontró en el classpath.");
+		    }
+			else
+			{
+				System.out.println("Archivo 'config.properties' encontrado correctamente.");
+			}
+
 			props.load(is);
 			is.close();
 			
