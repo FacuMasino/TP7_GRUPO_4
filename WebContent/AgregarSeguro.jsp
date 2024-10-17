@@ -3,6 +3,7 @@
 <%@page import="java.util.List"%>
 <%@page import="entidad.TipoSeguro"%>
 <%@page import="daoImpl.TipoSeguroDaoImpl"%>
+<%@page import="daoImpl.SeguroDaoImpl"%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -24,16 +25,10 @@
 				<p>Id Seguro</p>
 				<span>
 					<%
-						//int nextId=0;
-						if(request.getAttribute("nextId") != null)
-						{
-							int nextId=(int)request.getAttribute("nextId");
+						SeguroDaoImpl seguroDao = new SeguroDaoImpl();
+						int nextId = seguroDao.obtenerUltimoId()+1;
 					%>
-						<%=nextId %>
-					<%
-						}					
-					%>
-					
+					<%=nextId%>
 				</span>
 			</div>
 			<div class="form-group">

@@ -1,7 +1,7 @@
 package servlets;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,10 +9,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import daoImpl.SeguroDaoImpl;
-import daoImpl.TipoSeguroDaoImpl;
 import entidad.Seguro;
 import entidad.TipoSeguro;
 
@@ -30,50 +28,27 @@ public class ServletSeguro extends HttpServlet
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		SeguroDaoImpl seguroDao = new SeguroDaoImpl();
-		TipoSeguroDaoImpl tipoDao = new TipoSeguroDaoImpl();
-		int nextId = seguroDao.obtenerUltimoId() + 1;
-
-		request.setAttribute("nextId", nextId);
+		String message;
 		
-		if(request.getParameter("btnAceptar") != null) /*veo de preguntar por campos llenos...es necesario?*/
+		try
 		{
+			// Procesar solicitudes dentro del Try Catch
 			
-			String descripcion = request.getParameter("txtDescripcion");
-			int idTipo = Integer.parseInt(request.getParameter("ddlTipoSeguro").toString());
-			float costoContratacion = Float.parseFloat(request.getParameter("txtCosto").toString());
-			float costoAsegurado = Float.parseFloat(request.getParameter("txtMaximo").toString());
-			
-			Seguro seg = new Seguro();
-			TipoSeguro tipoSeg = new TipoSeguro();
-			tipoSeg.setId(idTipo);
-			//tipoSeg.setDescripcion("Prueba web");
-			
-			
-			seg.setDescripcion(descripcion);
-			seg.setTipoSeguro(tipoSeg);
-			seg.setCostoContratacion(costoContratacion);
-			seg.setCostoAsegurado(costoAsegurado);
-			
-			Boolean flag;
-			String message;
-			flag = seguroDao.agregar(seg);
-			
-			if(flag)
+			if(request.getParameter("btnAceptar") != null)
 			{
-				message = "Seguro Agregado OK";
-				nextId = seguroDao.obtenerUltimoId() + 1;
-				request.setAttribute("nextId", nextId);
+				boolean exito = procesarRequestAgregar(request);
+				message = exito ? "Seguro agregado con éxito!" : "Ocurrió un error al guardar seguro.";
+				
+				request.setAttribute("message", message);
 			}
-			else
-			{
-				message = "Error al guardar seguro...";
-			}
-			
-			request.setAttribute("message", message);
-			
 		}
-		
+		// Excepcion producida si faltan parámetros
+		catch (IllegalArgumentException ex)
+		{
+			message = ex.getMessage();
+			request.setAttribute("message", message);
+		}
+
 		
 		RequestDispatcher rd = request.getRequestDispatcher("AgregarSeguro.jsp");
 		rd.forward(request, response);		
@@ -84,5 +59,56 @@ public class ServletSeguro extends HttpServlet
 	{
 		// TODO Auto-generated method stub
 		doGet(request, response);
+	}
+	
+	private boolean validarParametrosAgregar(Map<String, String[]> parametros)
+	{
+		for(Map.Entry<String, String[]> entry: parametros.entrySet())
+		{
+			// Excluye al parametro btnAceptar
+			if(entry.getKey().equals("btnAceptar")) continue;
+			// Si algún parámetro del request está vacio, entonces no es válido
+			if(entry.getValue()[0].isEmpty()) return false;
+		}
+		// Si todos los parámetros tienen info, validar
+		return true;
+	}
+	
+	private boolean procesarRequestAgregar(HttpServletRequest request) throws IllegalArgumentException 
+	{
+		SeguroDaoImpl seguroDao = new SeguroDaoImpl();
+		
+		Map<String, String[]> parametros = request.getParameterMap();
+		
+		if(!validarParametrosAgregar(parametros))
+		{
+			throw new IllegalArgumentException("Debe completar todos los campos");
+		}
+		
+		try 
+		{
+			String descripcion = request.getParameter("txtDescripcion");
+			int idTipo = Integer.parseInt(request.getParameter("ddlTipoSeguro").toString());
+			float costoContratacion = Float.parseFloat(request.getParameter("txtCosto").toString());
+			float costoAsegurado = Float.parseFloat(request.getParameter("txtMaximo").toString());
+			
+			Seguro seg = new Seguro();
+			TipoSeguro tipoSeg = new TipoSeguro();
+			tipoSeg.setId(idTipo);
+
+			seg.setDescripcion(descripcion);
+			seg.setTipoSeguro(tipoSeg);
+			seg.setCostoContratacion(costoContratacion);
+			seg.setCostoAsegurado(costoAsegurado);
+			
+			boolean exito = seguroDao.agregar(seg);
+			
+			return exito;
+		}
+		catch (NumberFormatException ex)
+		{
+			throw new NumberFormatException("Verifique los campos, tienen un formato incorrecto");
+		}
+		
 	}
 }

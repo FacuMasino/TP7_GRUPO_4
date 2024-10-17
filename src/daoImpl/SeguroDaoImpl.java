@@ -62,7 +62,6 @@ public class SeguroDaoImpl implements ISeguroDao
 		catch(Exception exception)
 		{
 			exception.printStackTrace();
-			return false;
 		}
 		
 		return (rows > 0);
