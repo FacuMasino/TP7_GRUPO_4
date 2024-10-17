@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
 import dao.ITipoSeguroDao;
 import entidad.TipoSeguro;
 
@@ -36,7 +35,8 @@ public class TipoSeguroDaoImpl implements ITipoSeguroDao
 		ResultSet resultSet;
 		ArrayList<TipoSeguro> tipoSeguros = new ArrayList<TipoSeguro>();
 		
-		try {
+		try
+		{
 			Class.forName("com.mysql.jdbc.Driver");
 		}
 		catch(ClassNotFoundException e)
@@ -50,6 +50,7 @@ public class TipoSeguroDaoImpl implements ITipoSeguroDao
 			conn = conexion.getSQLConexion();
 			pstmt = conn.prepareStatement(readAllQry);
 			resultSet = pstmt.executeQuery();
+			
 			while(resultSet.next())
 			{
 				tipoSeguros.add(getTipoSeguro(resultSet));
@@ -59,6 +60,7 @@ public class TipoSeguroDaoImpl implements ITipoSeguroDao
 		{
 			e.printStackTrace();
 		}
+		
 		return tipoSeguros;
 	}
 }

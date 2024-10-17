@@ -2,29 +2,25 @@ package servlets;
 
 import java.io.IOException;
 import java.util.Map;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import daoImpl.SeguroDaoImpl;
 import entidad.Seguro;
 import entidad.TipoSeguro;
-
 
 @WebServlet("/ServletSeguro")
 public class ServletSeguro extends HttpServlet
 {
 	private static final long serialVersionUID = 1L;
        
-    public ServletSeguro() {
+    public ServletSeguro()
+    {
         super();
-        // TODO Auto-generated constructor stub
     }
-
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
@@ -32,32 +28,25 @@ public class ServletSeguro extends HttpServlet
 		
 		try
 		{
-			// Procesar solicitudes dentro del Try Catch
-			
 			if(request.getParameter("btnAceptar") != null)
 			{
 				boolean exito = procesarRequestAgregar(request);
 				message = exito ? "Seguro agregado con éxito!" : "Ocurrió un error al guardar seguro.";
-				
 				request.setAttribute("message", message);
 			}
 		}
-		// Excepcion producida si faltan parámetros
 		catch (IllegalArgumentException ex)
 		{
 			message = ex.getMessage();
 			request.setAttribute("message", message);
 		}
 
-		
 		RequestDispatcher rd = request.getRequestDispatcher("AgregarSeguro.jsp");
 		rd.forward(request, response);		
 	}
 
-
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 	
@@ -65,13 +54,18 @@ public class ServletSeguro extends HttpServlet
 	{
 		for(Map.Entry<String, String[]> entry: parametros.entrySet())
 		{
-			// Excluye al parametro btnAceptar
-			if(entry.getKey().equals("btnAceptar")) continue;
-			// Si algún parámetro del request está vacio, entonces no es válido
-			if(entry.getValue()[0].isEmpty()) return false;
+			if(entry.getKey().equals("btnAceptar")) // Excluir al parametro btnAceptar
+			{
+				continue;
+			}
+
+			if(entry.getValue()[0].isEmpty())
+			{				
+				return false;
+			}
 		}
-		// Si todos los parámetros tienen info, validar
-		return true;
+		
+		return true; // Si todos los parámetros tienen info, validar
 	}
 	
 	private boolean procesarRequestAgregar(HttpServletRequest request) throws IllegalArgumentException 
@@ -109,6 +103,5 @@ public class ServletSeguro extends HttpServlet
 		{
 			throw new NumberFormatException("Verifique los campos, tienen un formato incorrecto");
 		}
-		
 	}
 }

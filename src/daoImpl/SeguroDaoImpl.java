@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
 import dao.ISeguroDao;
 import entidad.Seguro;
 import entidad.TipoSeguro;
@@ -38,7 +37,8 @@ public class SeguroDaoImpl implements ISeguroDao
 		PreparedStatement pstmt = null;
 		int rows = 0;
 		
-		try {
+		try
+		{
 			Class.forName("com.mysql.jdbc.Driver");
 		}
 		catch(ClassNotFoundException e)
@@ -68,20 +68,20 @@ public class SeguroDaoImpl implements ISeguroDao
 	}
 
 	@Override
-	public boolean eliminar(Seguro seguro) {
-		// TODO Auto-generated method stub
+	public boolean eliminar(Seguro seguro)
+	{
 		return false;
 	}
 
 	@Override
-	public boolean modificar(Seguro seguro) {
-		// TODO Auto-generated method stub
+	public boolean modificar(Seguro seguro)
+	{
 		return false;
 	}
 
 	@Override
-	public Seguro obtenerSeguro(int idSeguro) {
-		// TODO Auto-generated method stub
+	public Seguro obtenerSeguro(int idSeguro)
+	{
 		return null;
 	}
 
@@ -90,11 +90,11 @@ public class SeguroDaoImpl implements ISeguroDao
 	{
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		
 		ResultSet resultSet;
 		int ultimoId = 0;
 		
-		try {
+		try
+		{
 			Class.forName("com.mysql.jdbc.Driver");
 		}
 		catch(ClassNotFoundException e)
@@ -108,22 +108,20 @@ public class SeguroDaoImpl implements ISeguroDao
 			conn = conexion.getSQLConexion();
 			pstmt = conn.prepareStatement(lastIdQry);
 			resultSet = pstmt.executeQuery();
-			
 			resultSet.next();
-			
 			ultimoId = resultSet.getInt("idSeguro");
-			
 		} 
 		catch (SQLException e) 
 		{
 			e.printStackTrace();
 		}
+		
 		return ultimoId;
 	}
 
 	@Override
-	public ArrayList<Seguro> readAllTipo(int idTipo) {
-		// TODO Auto-generated method stub
+	public ArrayList<Seguro> readAllTipo(int idTipo)
+	{
 		return null;
 	}
 	
@@ -138,14 +136,16 @@ public class SeguroDaoImpl implements ISeguroDao
 	}
 	
 	@Override
-	public ArrayList<Seguro> readAll() {
+	public ArrayList<Seguro> readAll()
+	{
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		
 		ResultSet resultSet;
 		ArrayList<Seguro> seguros = new ArrayList<Seguro>();
 		
-		try {
+		try
+		{
 			Class.forName("com.mysql.jdbc.Driver");
 		}
 		catch(ClassNotFoundException e)
@@ -159,6 +159,7 @@ public class SeguroDaoImpl implements ISeguroDao
 			conn = conexion.getSQLConexion();
 			pstmt = conn.prepareStatement(readAllQry);
 			resultSet = pstmt.executeQuery();
+			
 			while(resultSet.next())
 			{
 				seguros.add(getSeguro(resultSet));
@@ -168,8 +169,7 @@ public class SeguroDaoImpl implements ISeguroDao
 		{
 			e.printStackTrace();
 		}
+		
 		return seguros;
 	}
-
-	
 }

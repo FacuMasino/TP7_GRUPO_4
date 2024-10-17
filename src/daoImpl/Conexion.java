@@ -26,7 +26,7 @@ public class Conexion
 			
 			if (is == null)
 			{
-		        throw new FileNotFoundException("El archivo 'config.properties' no se encontró en el classpath.");
+		        throw new FileNotFoundException("El archivo 'config.properties' no se encontró en el directorio.");
 		    }
 			else
 			{

@@ -6,19 +6,12 @@ import daoImpl.SeguroDaoImpl;
 import entidad.Seguro;
 import entidad.TipoSeguro;
 
-/////////////
-/////////////
-//MAIN PARA PRUEBAS
-/////////////
-/////////////
-public class Main {
-
-	public static void main(String[] args) {
-		
+public class Main
+{
+	public static void main(String[] args)
+	{	
 		SeguroDaoImpl seguroDao = new SeguroDaoImpl();
 		Seguro seguro1 = new Seguro();
-		
-		
 		
 		seguro1.setDescripcion("Seguro de VIDA para mayores de 99 a�os");
 		seguro1.setTipoSeguro(new TipoSeguro(1));
@@ -26,7 +19,6 @@ public class Main {
 		seguro1.setCostoAsegurado(5);
 		
 		seguroDao.agregar(seguro1);
-		
 		
 		ArrayList<Seguro> listaSeguros = new ArrayList<Seguro>();
 		listaSeguros = seguroDao.readAll();
@@ -37,13 +29,9 @@ public class Main {
 			System.out.println("\n");
 		}
 		
-		
 		System.out.println("El ultimo ID generado es: " + seguroDao.obtenerUltimoId() + "\n");
 		System.out.println("El proximo ID sera: " + (seguroDao.obtenerUltimoId() + 1));
 		
-		
 		System.out.println("Terminado");
-
 	}
-
 }
