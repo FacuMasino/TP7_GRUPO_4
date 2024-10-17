@@ -13,21 +13,21 @@ import entidad.TipoSeguro;
 public class SeguroDaoImpl implements ISeguroDao
 {
 	private String insertQry;
-	private String deleteQry;
-	private String modifyQry;
-	private String obtenerQry;
+	// private String deleteQry;
+	// private String modifyQry;
+	// private String obtenerQry;
 	private String lastIdQry;
-	private String readAllTypeQry;
+	// private String readAllTypeQry;
 	private String readAllQry;
 	
 	public SeguroDaoImpl()
 	{
 		insertQry = "INSERT INTO seguros (descripcion, idTipo, costoContratacion,costoAsegurado) VALUES (?, ?, ?,?)";
-		deleteQry = "NO LA USAMOS EN ESTE TP";
-		modifyQry = "NO LA USAMOS EN ESTE TP";
-		obtenerQry = "";
+		// deleteQry = "NO LA USAMOS EN ESTE TP";
+		// modifyQry = "NO LA USAMOS EN ESTE TP";
+		// obtenerQry = "";
 		lastIdQry = "SELECT MAX(idSeguro) as idSeguro from seguros";
-		readAllTypeQry = "";
+		// readAllTypeQry = "";
 		readAllQry = "SELECT * from seguros";
 	}
 
