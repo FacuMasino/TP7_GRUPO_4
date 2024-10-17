@@ -11,6 +11,9 @@ import entidad.TipoSeguro;
 
 public class SeguroDaoImpl implements ISeguroDao
 {
+	private Connection conn = null;
+	private PreparedStatement pstmt = null;
+	private TipoSeguroDaoImpl tipoSeguroDaoImpl = new TipoSeguroDaoImpl();
 	private String insertQry;
 	// private String deleteQry;
 	// private String modifyQry;
@@ -132,26 +135,19 @@ public class SeguroDaoImpl implements ISeguroDao
 		int idTipo = resultSet.getInt("idTipo");
 		float costoContratacion = resultSet.getFloat("costoContratacion");
 		float costoAsegurado = resultSet.getFloat("costoAsegurado");
-		return new Seguro(idSeguro,descripcion,new TipoSeguro(idTipo),costoContratacion,costoAsegurado);
+		System.out.println("TIPO ID: " + idTipo);
+		System.out.println("TIPO ID: " + tipoSeguroDaoImpl.read(idTipo).getId());
+		System.out.println("TIPO DESC: " + tipoSeguroDaoImpl.read(idTipo).getDescripcion());
+		return new Seguro(idSeguro, descripcion, tipoSeguroDaoImpl.read(idTipo), costoContratacion, costoAsegurado);
 	}
 	
 	@Override
 	public ArrayList<Seguro> readAll()
-	{
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		
+	{	
 		ResultSet resultSet;
 		ArrayList<Seguro> seguros = new ArrayList<Seguro>();
 		
-		try
-		{
-			Class.forName("com.mysql.jdbc.Driver");
-		}
-		catch(ClassNotFoundException e)
-		{
-			e.printStackTrace();
-		}
+		callDriver();
 
 		try 
 		{
@@ -171,5 +167,17 @@ public class SeguroDaoImpl implements ISeguroDao
 		}
 		
 		return seguros;
+	}
+	
+	private void callDriver()
+	{
+		try
+		{
+			Class.forName("com.mysql.jdbc.Driver");
+		}
+		catch(ClassNotFoundException e)
+		{
+			e.printStackTrace();
+		}
 	}
 }

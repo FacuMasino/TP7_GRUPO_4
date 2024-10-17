@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Map;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -24,16 +25,49 @@ public class ServletSeguro extends HttpServlet
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		String message;
+		if(request.getParameter("btnAceptar") != null)
+		{
+			btnAceptarClick(request, response);
+		}
 		
+		if(request.getParameter("btnFiltrar") != null)
+		{
+			btnFiltrarClick(request, response);
+		}
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+	{
+		doGet(request, response);
+	}
+	
+	private void btnFiltrarClick(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+	{
 		try
 		{
-			if(request.getParameter("btnAceptar") != null)
-			{
+			SeguroDaoImpl seguroDaoImpl = new SeguroDaoImpl();
+			ArrayList<Seguro> seguros = seguroDaoImpl.readAll();
+			request.setAttribute("seguros", seguros);
+		}
+		catch (Exception exeption)
+		{
+			System.out.println(exeption.getMessage());
+			exeption.printStackTrace();
+		}
+		
+		RequestDispatcher rd = request.getRequestDispatcher("ListarSeguros.jsp");
+		rd.forward(request, response);
+	}
+	
+	private void btnAceptarClick(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+	{
+		String message;
+
+		try
+		{
 				boolean exito = procesarRequestAgregar(request);
 				message = exito ? "Seguro agregado con éxito!" : "Ocurrió un error al guardar seguro.";
 				request.setAttribute("message", message);
-			}
 		}
 		catch (IllegalArgumentException ex)
 		{
@@ -42,12 +76,7 @@ public class ServletSeguro extends HttpServlet
 		}
 
 		RequestDispatcher rd = request.getRequestDispatcher("AgregarSeguro.jsp");
-		rd.forward(request, response);		
-	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-	{
-		doGet(request, response);
+		rd.forward(request, response);
 	}
 	
 	private boolean validarParametrosAgregar(Map<String, String[]> parametros)

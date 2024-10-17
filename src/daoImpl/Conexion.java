@@ -28,10 +28,6 @@ public class Conexion
 			{
 		        throw new FileNotFoundException("El archivo 'config.properties' no se encontró en el directorio.");
 		    }
-			else
-			{
-				System.out.println("Archivo 'config.properties' encontrado correctamente.");
-			}
 
 			props.load(is);
 			is.close();

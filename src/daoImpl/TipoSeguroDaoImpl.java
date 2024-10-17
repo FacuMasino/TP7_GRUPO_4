@@ -10,11 +10,15 @@ import entidad.TipoSeguro;
 
 public class TipoSeguroDaoImpl implements ITipoSeguroDao
 {
+	private Connection conn = null;
+	private PreparedStatement pstmt = null;
 	private String readAllQry;
+	private String readQuery;
 	
-	public TipoSeguroDaoImpl () 
+	public TipoSeguroDaoImpl()
 	{
 		readAllQry = "SELECT * from tiposeguros";
+		readQuery = "SELECT idTipo, descripcion from tipoSeguros where idTipo = ?;";
 	}
 	
 	private TipoSeguro getTipoSeguro(ResultSet resultSet) throws SQLException
@@ -26,23 +30,39 @@ public class TipoSeguroDaoImpl implements ITipoSeguroDao
 		return tipoSeguro;
 	}
 	
-	@Override
-	public ArrayList<TipoSeguro> readAll() 
+	public TipoSeguro read(int id)
 	{
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		
 		ResultSet resultSet;
-		ArrayList<TipoSeguro> tipoSeguros = new ArrayList<TipoSeguro>();
+		TipoSeguro tipoSeguro = new TipoSeguro();
 		
 		try
 		{
-			Class.forName("com.mysql.jdbc.Driver");
+			Conexion conexion = new Conexion();
+			conn = conexion.getSQLConexion();
+			pstmt = conn.prepareStatement(readQuery);
+			pstmt.setInt(1, id);
+			resultSet = pstmt.executeQuery();
+			
+			if (resultSet.next())
+			{
+				tipoSeguro = getTipoSeguro(resultSet);
+			}
 		}
-		catch(ClassNotFoundException e)
+		catch (SQLException e) 
 		{
 			e.printStackTrace();
 		}
+		
+		return tipoSeguro;
+	}
+	
+	@Override
+	public ArrayList<TipoSeguro> readAll()
+	{	
+		ResultSet resultSet;
+		ArrayList<TipoSeguro> tipoSeguros = new ArrayList<TipoSeguro>();
+		
+		callDriver();
 
 		try 
 		{
@@ -51,16 +71,28 @@ public class TipoSeguroDaoImpl implements ITipoSeguroDao
 			pstmt = conn.prepareStatement(readAllQry);
 			resultSet = pstmt.executeQuery();
 			
-			while(resultSet.next())
+			while (resultSet.next())
 			{
 				tipoSeguros.add(getTipoSeguro(resultSet));
 			}
-		} 
+		}
 		catch (SQLException e) 
 		{
 			e.printStackTrace();
 		}
 		
 		return tipoSeguros;
+	}
+	
+	private void callDriver()
+	{
+		try
+		{
+			Class.forName("com.mysql.jdbc.Driver");
+		}
+		catch(ClassNotFoundException e)
+		{
+			e.printStackTrace();
+		}
 	}
 }

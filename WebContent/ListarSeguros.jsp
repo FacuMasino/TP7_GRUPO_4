@@ -2,6 +2,7 @@
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="java.util.List"%>
 <%@ page import="entidad.TipoSeguro"%>
+<%@ page import="entidad.Seguro"%>
 <%@ page import="daoImpl.TipoSeguroDaoImpl"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -18,6 +19,12 @@
 			TipoSeguroDaoImpl tipoDao = new TipoSeguroDaoImpl();
 			ArrayList<TipoSeguro> listaTipos = new ArrayList<TipoSeguro>();
 			listaTipos = tipoDao.readAll();
+			ArrayList<Seguro> seguros = null;
+			
+			if (request.getAttribute("seguros") != null)
+			{
+				seguros = (ArrayList<Seguro>)request.getAttribute("seguros");
+			}
 		%>
 		<h1>Tipos de seguros de la base de datos</h1>
 		<form action="ServletSeguro" method="get">
@@ -29,12 +36,19 @@
 						for(TipoSeguro tipo : listaTipos)
 						{
 					%>
-						<option value=<%=tipo.getId() %>><%= tipo.getDescripcion() %></option>
+						<option value=<%=tipo.getId() %>>
+							<%= tipo.getDescripcion() %>
+						</option>
 					<%
 						}
 					%>
 				</select>
-				<button type="submit" name="btnFiltrar" style="margin-left: 5px">Filtrar</button>
+				<button
+					type="submit"
+					name="btnFiltrar"
+					style="margin-left: 5px">
+					Filtrar
+				</button>
 			</div>
 		</form>
 		<br>
@@ -46,13 +60,35 @@
 				<th>Costo contratación</th>
 				<th>Costo máximo asegurado</th>
 			</tr>
-			<tr>
-				<td>1</td>
-				<td>Descripción de ejemplo del seguro para prueba</td>
-				<td>Descripción de ejemplo del tipo de seguro para prueba</td>
-				<td>15000.00</td>
-				<td>999000.00</td>
-			</tr>
+			<%
+				if (seguros != null)
+				{
+					for (Seguro seguro : seguros)
+					{
+			%>
+						<tr>
+							<td><%=seguro.getId()%></td>
+							<td><%=seguro.getDescripcion()%></td>
+							<td><%=seguro.getTipoSeguro().getDescripcion()%></td>
+							<td><%=seguro.getCostoContratacion()%></td>
+							<td><%=seguro.getCostoAsegurado()%></td>
+						</tr>
+			<%		
+					}
+				}
+				else
+				{
+			%>
+					<tr>
+						<td>0</td>
+						<td>N/A</td>
+						<td>N/A</td>
+						<td>0.00</td>
+						<td>0.00</td>
+					</tr>
+			<%
+				}
+			%>
 		</table>
 	</body>
 </html>
