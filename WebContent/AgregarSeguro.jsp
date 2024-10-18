@@ -40,7 +40,7 @@
 			<div class="form-group">
 				<p>Tipo de Seguro</p>
 				<select name="ddlTipoSeguro">
-					<option value="1">Seleccionar Tipo</option>
+					<option value=null>Seleccionar Tipo</option>
 					<%
 						for(TipoSeguro tipo : listaTipos)
 						{
