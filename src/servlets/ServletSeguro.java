@@ -17,7 +17,7 @@ import entidad.TipoSeguro;
 public class ServletSeguro extends HttpServlet
 {
 	private static final long serialVersionUID = 1L;
-       
+
     public ServletSeguro()
     {
         super();
@@ -45,8 +45,9 @@ public class ServletSeguro extends HttpServlet
 	{
 		try
 		{
+			int ddlTipoSelectedVal = Integer.parseInt(request.getParameter("ddlTipo"));
 			SeguroDaoImpl seguroDaoImpl = new SeguroDaoImpl();
-			ArrayList<Seguro> seguros = seguroDaoImpl.readAll();
+			ArrayList<Seguro> seguros = seguroDaoImpl.readAll(ddlTipoSelectedVal);
 			request.setAttribute("seguros", seguros);
 		}
 		catch (Exception exeption)

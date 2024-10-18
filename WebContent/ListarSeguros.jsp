@@ -31,7 +31,7 @@
 			<div class="form-group" style="width: 35%">
 				<p>Búsqueda por tipo de seguro: </p>
 				<select name="ddlTipo">
-					<option value="1">Seleccionar Tipo</option>
+					<option value="0">Seleccionar Tipo</option>
 					<%
 						for(TipoSeguro tipo : listaTipos)
 						{

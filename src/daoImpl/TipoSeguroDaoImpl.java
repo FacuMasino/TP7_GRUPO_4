@@ -61,7 +61,6 @@ public class TipoSeguroDaoImpl implements ITipoSeguroDao
 	{	
 		ResultSet resultSet;
 		ArrayList<TipoSeguro> tipoSeguros = new ArrayList<TipoSeguro>();
-		
 		callDriver();
 
 		try 

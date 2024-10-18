@@ -14,23 +14,25 @@ public class SeguroDaoImpl implements ISeguroDao
 	private Connection conn = null;
 	private PreparedStatement pstmt = null;
 	private TipoSeguroDaoImpl tipoSeguroDaoImpl = new TipoSeguroDaoImpl();
-	private String insertQry;
 	// private String deleteQry;
 	// private String modifyQry;
 	// private String obtenerQry;
-	private String lastIdQry;
 	// private String readAllTypeQry;
+	private String insertQry;
 	private String readAllQry;
+	private String readAllOfQuery;
+	private String lastIdQry;
 	
 	public SeguroDaoImpl()
 	{
-		insertQry = "INSERT INTO seguros (descripcion, idTipo, costoContratacion,costoAsegurado) VALUES (?, ?, ?,?)";
-		// deleteQry = "NO LA USAMOS EN ESTE TP";
-		// modifyQry = "NO LA USAMOS EN ESTE TP";
+		// deleteQry = "";
+		// modifyQry = "";
 		// obtenerQry = "";
-		lastIdQry = "SELECT MAX(idSeguro) as idSeguro from seguros";
 		// readAllTypeQry = "";
-		readAllQry = "SELECT * from seguros";
+		insertQry = "INSERT INTO seguros (descripcion, idTipo, costoContratacion,costoAsegurado) VALUES (?, ?, ?,?)";
+		readAllQry = "SELECT idSeguro, descripcion, idTipo, costoContratacion, costoAsegurado from seguros;";
+		readAllOfQuery = "SELECT idSeguro, descripcion, idTipo, costoContratacion, costoAsegurado from seguros where idTipo = ?;";
+		lastIdQry = "SELECT MAX(idSeguro) as idSeguro from seguros";
 	}
 
 	@Override
@@ -135,25 +137,31 @@ public class SeguroDaoImpl implements ISeguroDao
 		int idTipo = resultSet.getInt("idTipo");
 		float costoContratacion = resultSet.getFloat("costoContratacion");
 		float costoAsegurado = resultSet.getFloat("costoAsegurado");
-		System.out.println("TIPO ID: " + idTipo);
-		System.out.println("TIPO ID: " + tipoSeguroDaoImpl.read(idTipo).getId());
-		System.out.println("TIPO DESC: " + tipoSeguroDaoImpl.read(idTipo).getDescripcion());
 		return new Seguro(idSeguro, descripcion, tipoSeguroDaoImpl.read(idTipo), costoContratacion, costoAsegurado);
 	}
 	
 	@Override
-	public ArrayList<Seguro> readAll()
-	{	
+	public ArrayList<Seguro> readAll(int idTipo)
+	{
 		ResultSet resultSet;
 		ArrayList<Seguro> seguros = new ArrayList<Seguro>();
-		
 		callDriver();
 
-		try 
+		try
 		{
 			Conexion conexion = new Conexion();
 			conn = conexion.getSQLConexion();
-			pstmt = conn.prepareStatement(readAllQry);
+			
+			if (0 < idTipo)
+			{
+				pstmt = conn.prepareStatement(readAllOfQuery);
+				pstmt.setInt(1, idTipo);
+			}
+			else
+			{
+				pstmt = conn.prepareStatement(readAllQry);
+			}
+			
 			resultSet = pstmt.executeQuery();
 			
 			while(resultSet.next())

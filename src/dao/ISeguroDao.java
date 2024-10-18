@@ -11,5 +11,5 @@ public interface ISeguroDao
 	public Seguro obtenerSeguro(int idSeguro);
 	public int obtenerUltimoId();
 	public ArrayList<Seguro> readAllTipo(int idTipo);
-	public ArrayList<Seguro> readAll();
+	public ArrayList<Seguro> readAll(int idTipo);
 }
