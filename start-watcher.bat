@@ -1,0 +1,1 @@
+tailwindcss.exe -i ./WebContent/css/input.css -o ./WebContent/css/tw-styles.css --watch
