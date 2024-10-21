@@ -1,5 +1,13 @@
 # TP6_GRUPO_4
 
+## Importante - Configuración Eclipse
+
+Se debe habilitar el "auto refresh" para que eclipse reconozca automáticamente
+cada vez que se actualiza de forma externa un archivo CSS. En este caso tw-styles.css es actualizado por el Watcher de TailwindCSS cada vez que se utilice una nueva clase.
+
+- Cómo habilitarlo?
+window → preferences → general → workspace and check the "Refresh using native hooks or polling" check-box.
+
 ## Compilación
 
 ### Java Development Kit

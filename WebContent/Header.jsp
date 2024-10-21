@@ -3,21 +3,16 @@
 <!DOCTYPE html>
 
 <html>
-	<% request.setCharacterEncoding("UTF-8"); %>
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-		<title></title>
-	</head>
 	<body>
-		<ul class="menu">
-			<li class="menu-item">
-				<a class="menu-link" href="Inicio.jsp">Inicio</a>
+		<ul class="flex mb-4">
+			<li class="mx-2">
+				<a class="text-blue-700 hover:underline" href="Inicio.jsp">Inicio</a>
 			</li>
-			<li class="menu-item">
-				<a class="menu-link" href="AgregarSeguro.jsp">Agregar seguro</a>				
+			<li class="mx-2">
+				<a class="text-blue-700 hover:underline" href="AgregarSeguro.jsp">Agregar seguro</a>				
 			</li>
-			<li class="menu-item">
-				<a class="menu-link" href="ListarSeguros.jsp">Listar seguros</a>
+			<li class="mx-2">
+				<a class="text-blue-700 hover:underline" href="ListarSeguros.jsp">Listar seguros</a>
 			</li>
 		</ul>
 	</body>

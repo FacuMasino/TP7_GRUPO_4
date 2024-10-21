@@ -19,14 +19,14 @@ public class Main
 		
 		seguroDao.agregar(seguro1);
 		
-		ArrayList<Seguro> listaSeguros = new ArrayList<Seguro>();
-		listaSeguros = seguroDao.readAll();
+		//ArrayList<Seguro> listaSeguros = new ArrayList<Seguro>();
+		//listaSeguros = seguroDao.readAll();
 		
-		for(Seguro s : listaSeguros)
+		/*for(Seguro s : listaSeguros)
 		{
 			System.out.println(s.toString());
 			System.out.println("\n");
-		}
+		}*/
 		
 		System.out.println("El ultimo ID generado es: " + seguroDao.obtenerUltimoId() + "\n");
 		System.out.println("El proximo ID sera: " + (seguroDao.obtenerUltimoId() + 1));
