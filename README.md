@@ -1,4 +1,4 @@
-# TP6_GRUPO_4
+# TP7_GRUPO_4
 
 ## Compilación
 
